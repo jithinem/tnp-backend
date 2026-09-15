@@ -1,0 +1,34 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+
+# Build output
+dist/
+
+# Environment
+.env
+.env.local
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+src/generated/
+
+# Logs
+logs/
+*.log
+
+# Local file uploads (dev storage)
+uploads/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+

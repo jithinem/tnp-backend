@@ -1,0 +1,27 @@
+model Job {
+  id               Int      @id @default(autoincrement())
+  title            String
+  company_name     String
+  location         String
+  description      String
+  requirements     String
+  salary_min       Decimal?
+  salary_max       Decimal?
+  experience_level String
+  category_id      Int
+  employment_type  String
+  is_featured      Boolean  @default(false)
+  is_active        Boolean  @default(true)
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  category     Category      @relation(fields: [category_id], references: [id])
+  applications Application[]
+
+  @@index([category_id])
+  @@index([is_active])
+  @@index([is_featured])
+  @@index([created_at])
+  @@map("jobs")
+  @@schema("jobs")
+}

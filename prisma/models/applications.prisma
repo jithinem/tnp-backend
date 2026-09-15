@@ -1,0 +1,28 @@
+enum ApplicationStatus {
+  PENDING
+  SHORTLISTED
+  REJECTED
+
+  @@schema("jobs")
+}
+
+model Application {
+  id           Int               @id @default(autoincrement())
+  job_id       Int
+  user_id      Int
+  cover_letter String?
+  resume_url   String?
+  status       ApplicationStatus @default(PENDING)
+  applied_at   DateTime          @default(now())
+
+  job  Job  @relation(fields: [job_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [user_id], references: [id])
+
+  @@unique([job_id, user_id])
+  @@index([job_id])
+  @@index([user_id])
+  @@index([status])
+  @@index([applied_at])
+  @@map("applications")
+  @@schema("jobs")
+}

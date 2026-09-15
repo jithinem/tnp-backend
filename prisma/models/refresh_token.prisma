@@ -1,0 +1,13 @@
+model RefreshToken {
+  id          Int       @id @default(autoincrement())
+  token_hash  String    @unique
+  user_id     Int
+  expiry_date DateTime
+  revoked_at  DateTime?
+  created_at  DateTime  @default(now())
+
+  users User @relation(fields: [user_id], references: [id])
+
+  @@map("refresh_tokens")
+  @@schema("users")
+}

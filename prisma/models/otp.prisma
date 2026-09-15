@@ -1,0 +1,29 @@
+enum OtpPurpose {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+  LOGIN
+
+  @@schema("users")
+}
+
+model Otp {
+  id          Int        @id @default(autoincrement())
+  user_id     Int?
+  email       String?
+  phone       String?
+  otp_hash    String
+  purpose     OtpPurpose
+  expires_at  DateTime
+  verified_at DateTime?
+  attempts    Int        @default(0)
+  created_at  DateTime   @default(now())
+
+  user User? @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+  @@index([email])
+  @@index([phone])
+  @@index([expires_at])
+  @@map("otps")
+  @@schema("users")
+}
