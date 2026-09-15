@@ -13,6 +13,7 @@ const updateUser = async (id: number, payload: {
 
   const data: Record<string, unknown> = { ...payload };
   delete data.password;
+  delete data.role;
 
   if (payload.password) {
     data.password_hash = await bcrypt.hash(payload.password, 10);
@@ -21,6 +22,8 @@ const updateUser = async (id: number, payload: {
   if (role) {
     data.role_id = role.id;
   }
+  // console.warn(data,"data");
+  
 
   const user = await prisma.user.update({
     where: { id },

@@ -29,7 +29,7 @@ authRoutes.post('/signup', userSignupValidation, userSignupController);
 authRoutes.post('/signup/verify-otp', userSignupVerifyOtpValidation, userSignupVerifyOtpController);
 
 authRoutes.get('/me',
-  accessGuard,roleGuard(['applicant']), 
+  accessGuard,roleGuard(['applicant','admin']), 
   authMiddleware, userMeController);
 authRoutes.put('/me', accessGuard, roleGuard(['applicant']), authMiddleware, updateMyProfileController);
 
